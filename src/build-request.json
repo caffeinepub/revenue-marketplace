@@ -1,0 +1,121 @@
+{
+  "kind": "build_request",
+  "title": "Create revenue-generating marketplace platform",
+  "projectName": "Revenue Marketplace",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a marketplace platform that connects buyers and sellers with transaction capabilities",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "Make me a Website/ App that can bring me 100000 in"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can browse available listings",
+        "Sellers can create and manage listings with pricing",
+        "Platform supports transaction processing"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement user authentication system using Internet Identity for secure access",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can sign up and log in using Internet Identity",
+        "User sessions persist across page refreshes",
+        "Different user roles (buyer/seller) are supported"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Build a product listing system where sellers can create listings with title, description, price, and category",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Sellers can create new listings with all required fields",
+        "Listings are stored persistently in the backend",
+        "Listings can be edited and deleted by their creators"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement a payment processing system that handles transactions between buyers and sellers with platform commission tracking",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Buyers can purchase listed items",
+        "Platform calculates and tracks commission on each sale",
+        "Transaction history is maintained for users"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Create a revenue dashboard showing total platform earnings, transaction volume, and growth metrics",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Dashboard displays total revenue generated",
+        "Shows number of transactions and active users",
+        "Includes visual charts for revenue trends"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Design a modern, professional interface using a sophisticated dark theme with gold and emerald green accents that conveys trust and premium value",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Visual design uses consistent dark background with gold/emerald accent colors",
+        "Typography hierarchy is clear and professional",
+        "Layout emphasizes key revenue-driving actions",
+        "Interface elements feel polished and trustworthy"
+      ]
+    }
+  ],
+  "constraints": [
+    "Use Internet Identity for authentication (no third-party auth services)",
+    "All backend logic must be implemented in the single main Motoko actor",
+    "Payment processing must be handled within the Internet Computer ecosystem"
+  ],
+  "nonGoals": [
+    "Integration with external payment providers like PayPal or Stripe",
+    "Real-time chat between buyers and sellers",
+    "Mobile native apps",
+    "Social media integration",
+    "Email notification system"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Professional marketplace hero banner with abstract financial growth imagery in dark theme with gold accents (hero-banner.dim_1200x400.png)",
+      "Minimalist currency or transaction icon for dashboard (transaction-icon.dim_128x128.png)"
+    ],
+    "edits": []
+  }
+}

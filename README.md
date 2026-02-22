@@ -1,2 +1,3 @@
-# revenue-marketplace
-Exported from Caffeine project: Revenue Marketplace
+## Revenue Marketplace
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

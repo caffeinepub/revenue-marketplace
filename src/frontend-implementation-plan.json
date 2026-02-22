@@ -1,0 +1,239 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Revenue Marketplace Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create marketplace platform frontend with browsing, listing management, and transaction capabilities",
+      "acceptanceCriteria": [
+        "Users can browse available listings",
+        "Sellers can create and manage listings with pricing",
+        "Platform supports transaction processing"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/BrowseListings.tsx",
+          "operation": "create",
+          "description": "Create a page for browsing all product listings. Display listings in a grid with product images, titles, prices, and categories. Include filter/sort options. Use the blob-storage component's ExternalBlob.getDirectURL() method to display product images. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SellerDashboard.tsx",
+          "operation": "create",
+          "description": "Create a seller dashboard page showing the authenticated user's own listings. Display create/edit/delete controls for listings owned by the current user. Call backend methods getAllProductListings and filter by seller principal matching identity.getPrincipal(). Use the authorization component to ensure only authenticated users can access this page."
+        },
+        {
+          "path": "frontend/src/pages/CreateListing.tsx",
+          "operation": "create",
+          "description": "Create a form page for sellers to create new product listings. Include fields for title, description, price, category, and image upload. Use the blob-storage component's ExternalBlob.fromBytes() for image uploads and withUploadProgress() to show upload progress. Call backend method createProductListing. Use the authorization component to restrict access to authenticated sellers. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ListingDetails.tsx",
+          "operation": "create",
+          "description": "Create a detailed product listing page showing full product information. Include a purchase button for buyers. Display product image using ExternalBlob.getDirectURL(). Fetch listing data using backend method getProductById. For authenticated buyers, enable transaction initiation calling backend method createTransaction."
+        },
+        {
+          "path": "frontend/src/components/ListingCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable product listing card component. Display product image using ExternalBlob.getDirectURL(), title, price, and category. Link to ListingDetails page. Style with dark theme, gold and emerald accents per design requirements."
+        },
+        {
+          "path": "frontend/src/hooks/useListings.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for listing operations: useGetAllListings, useGetListingById, useCreateListing. Wrap backend methods getAllProductListings, getProductById, createProductListing. Handle loading and error states."
+        },
+        {
+          "path": "frontend/src/hooks/useTransactions.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for transaction operations: useCreateTransaction, useGetMyTransactions. Wrap backend methods createTransaction and getMyTransactions. Handle authorization and error states."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement Internet Identity authentication with role-based access control",
+      "acceptanceCriteria": [
+        "Users can sign up and log in using Internet Identity",
+        "User sessions persist across page refreshes",
+        "Different user roles (buyer/seller) are supported"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create a login/logout button component using the authorization component's useInternetIdentity hook. Handle login, logout, and query client clearing on logout. Display login status and disable during authentication. Follow the authorization component's Login Component usage pattern exactly. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create a modal that prompts first-time users to enter their name. Use the authorization component's getCallerUserProfile and saveCallerUserProfile methods. Show only when isAuthenticated && isFetched && userProfile === null to prevent modal flash. Follow the authorization component's User Profile Setup and Preventing Profile Setup Modal Flash patterns. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query hooks useGetCallerUserProfile and useSaveCallerUserProfile wrapping backend methods. Implement custom isLoading logic that accounts for actorFetching to prevent profile setup modal flash per authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProtectedRoute.tsx",
+          "operation": "create",
+          "description": "Create a route wrapper component that checks authentication status before rendering child components. Redirect to login or show access denied screen for unauthenticated users. Use the authorization component's useInternetIdentity hook to check identity state."
+        },
+        {
+          "path": "frontend/src/components/AccessDeniedScreen.tsx",
+          "operation": "create",
+          "description": "Create an access denied screen component for unauthorized users. Display a message and login button. Style with dark theme and gold accents per design requirements."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire ProfileSetupModal into the main App component. Show modal when user is authenticated but has no profile. Ensure modal check happens after actor initialization. Use the authorization component's authentication patterns."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build product listing management system with create, edit, and delete capabilities",
+      "acceptanceCriteria": [
+        "Sellers can create new listings with all required fields",
+        "Listings are stored persistently in the backend",
+        "Listings can be edited and deleted by their creators"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/EditListing.tsx",
+          "operation": "create",
+          "description": "Create an edit listing form page. Pre-populate form with existing listing data fetched via getProductById. Allow updating title, description, price, category, and image. Use blob-storage component's ExternalBlob for image handling. Verify ownership using authorization component's identity comparison pattern before showing edit controls. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/DeleteListingButton.tsx",
+          "operation": "create",
+          "description": "Create a delete listing button component with confirmation dialog. Verify the current user is the listing owner by comparing identity.getPrincipal() with listing.seller. Use authorization component's identity comparison pattern. Show only to listing owners."
+        },
+        {
+          "path": "frontend/src/pages/SellerDashboard.tsx",
+          "operation": "modify",
+          "description": "Add navigation links to CreateListing and EditListing pages. Display DeleteListingButton for each owned listing. Show listing count and management controls."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register routes for /create-listing and /edit-listing/:id. Wrap with ProtectedRoute component to ensure authentication. Wire navigation from SellerDashboard to these routes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement payment processing frontend with transaction creation and commission tracking",
+      "acceptanceCriteria": [
+        "Buyers can purchase listed items",
+        "Platform calculates and tracks commission on each sale",
+        "Transaction history is maintained for users"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PurchaseButton.tsx",
+          "operation": "create",
+          "description": "Create a purchase button component. Call backend method createTransaction with buyer, seller, amount, and commission parameters. Handle authentication requirement using authorization component. Show loading state during transaction. Display success/error feedback."
+        },
+        {
+          "path": "frontend/src/pages/TransactionHistory.tsx",
+          "operation": "create",
+          "description": "Create a page displaying the current user's transaction history. Call backend method getMyTransactions. Show transaction details including amount, commission, timestamp, and counterparty. Use authorization component to ensure only authenticated users can view their transactions."
+        },
+        {
+          "path": "frontend/src/pages/TransactionSuccess.tsx",
+          "operation": "create",
+          "description": "Create a transaction success confirmation page. Display purchase confirmation message and transaction details. Include link to TransactionHistory page."
+        },
+        {
+          "path": "frontend/src/pages/TransactionFailure.tsx",
+          "operation": "create",
+          "description": "Create a transaction failure page. Display error message and suggested next steps. Include retry button or link back to listing."
+        },
+        {
+          "path": "frontend/src/pages/ListingDetails.tsx",
+          "operation": "modify",
+          "description": "Wire PurchaseButton into the listing details page. Calculate commission (e.g., 10% of price) before calling createTransaction. Navigate to TransactionSuccess or TransactionFailure based on transaction outcome."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register routes for /transaction-history, /transaction-success, and /transaction-failure. Wrap TransactionHistory with ProtectedRoute. Add navigation link to TransactionHistory in the main navigation or user menu."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create revenue dashboard showing platform earnings, transaction volume, and growth metrics with visual charts",
+      "acceptanceCriteria": [
+        "Dashboard displays total revenue generated",
+        "Shows number of transactions and active users",
+        "Includes visual charts for revenue trends"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/RevenueDashboard.tsx",
+          "operation": "create",
+          "description": "Create an admin-only revenue dashboard page. Display total platform commission using backend method getTotalCommission. Show transaction count using getAllTransactions length. Include revenue trend chart visualizing transaction data over time. Use authorization component to restrict access to admin role only via isCallerAdmin check. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/RevenueChart.tsx",
+          "operation": "create",
+          "description": "Create a revenue trend chart component using a charting library (e.g., recharts). Accept transaction data as props and visualize commission over time. Style with dark theme, gold and emerald accents."
+        },
+        {
+          "path": "frontend/src/components/MetricCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable metric display card component. Show label, value, and optional trend indicator. Style with dark background, gold or emerald accent border."
+        },
+        {
+          "path": "frontend/src/hooks/useRevenue.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for revenue data: useGetTotalCommission and useGetAllTransactions. Wrap backend methods getTotalCommission and getAllTransactions. Handle loading and error states."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register route for /revenue-dashboard. Wrap with ProtectedRoute and add admin-only access check. Add navigation link to RevenueDashboard in admin menu or header."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Design modern professional interface with dark theme, gold and emerald green accents",
+      "acceptanceCriteria": [
+        "Visual design uses consistent dark background with gold/emerald accent colors",
+        "Typography hierarchy is clear and professional",
+        "Layout emphasizes key revenue-driving actions",
+        "Interface elements feel polished and trustworthy"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define global CSS custom properties for dark theme colors. Set --color-background to dark gray/black, --color-gold to gold accent (#FFD700 or similar), --color-emerald to emerald green accent (#10B981 or similar). Set typography scale with clear hierarchy. Apply dark theme base styles to body and common elements. Reference generated images using workspace paths: frontend/public/assets/generated/hero-banner.dim_1200x400.png and frontend/public/assets/generated/transaction-icon.dim_128x128.png."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom dark background colors, gold accent color, and emerald accent color. Define color palette matching design requirements. Set font families for professional typography hierarchy."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create a main layout component with header, navigation, and footer. Use dark background with gold and emerald accents. Display generated hero banner image from frontend/public/assets/generated/hero-banner.dim_1200x400.png on marketing sections. Include LoginButton and user profile display in header. Emphasize call-to-action buttons for revenue-driving actions (create listing, browse marketplace)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all routes with Layout component. Apply consistent dark theme styling throughout the application."
+        },
+        {
+          "path": "frontend/src/components/IconDisplay.tsx",
+          "operation": "create",
+          "description": "Create a component to display the transaction icon from frontend/public/assets/generated/transaction-icon.dim_128x128.png. Use in dashboard metric cards and transaction-related UI elements."
+        }
+      ]
+    }
+  ]
+}

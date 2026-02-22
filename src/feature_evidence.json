@@ -1,0 +1,149 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-marketplace-platform-that-connects-buyers-and-sellers-with-transaction-capabilities",
+      "featureTitle": "Create a marketplace platform that connects buyers and sellers with transaction capabilities",
+      "files": [
+        "frontend/src/components/ListingCard.tsx",
+        "frontend/src/pages/BrowseListings.tsx",
+        "frontend/src/pages/CreateListing.tsx",
+        "frontend/src/pages/ListingDetails.tsx",
+        "frontend/src/pages/SellerDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-user-authentication-system-using-internet-identity-for-secure-access",
+      "featureTitle": "Implement user authentication system using Internet Identity for secure access",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AccessDeniedScreen.tsx",
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/components/ProtectedRoute.tsx",
+        "frontend/src/hooks/useUserProfile.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-product-listing-system-where-sellers-can-create-listings-with-title-description-price-and-category",
+      "featureTitle": "Build a product listing system where sellers can create listings with title, description, price, and category",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/DeleteListingButton.tsx",
+        "frontend/src/pages/EditListing.tsx",
+        "frontend/src/pages/SellerDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-payment-processing-system-that-handles-transactions-between-buyers-and-sellers-with-platform-commission-tracking",
+      "featureTitle": "Implement a payment processing system that handles transactions between buyers and sellers with platform commission tracking",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/PurchaseButton.tsx",
+        "frontend/src/pages/ListingDetails.tsx",
+        "frontend/src/pages/TransactionFailure.tsx",
+        "frontend/src/pages/TransactionHistory.tsx",
+        "frontend/src/pages/TransactionSuccess.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-revenue-dashboard-showing-total-platform-earnings-transaction-volume-and-growth-metrics",
+      "featureTitle": "Create a revenue dashboard showing total platform earnings, transaction volume, and growth metrics",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/MetricCard.tsx",
+        "frontend/src/components/RevenueChart.tsx",
+        "frontend/src/pages/RevenueDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-a-modern-professional-interface-using-a-sophisticated-dark-theme-with-gold-and-emerald-green-accents-that-conveys-trust-and-premium-value",
+      "featureTitle": "Design a modern, professional interface using a sophisticated dark theme with gold and emerald green accents that conveys trust and premium value",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/IconDisplay.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
